@@ -1,3 +1,4 @@
+
 /**
  * Write a description of class Staff here.
  *
@@ -25,10 +26,6 @@ public class Staff
         return this.staffName;
     }
     
-    public String getStaffID() {
-        return this.staffID;
-    }
-    
     public String getPassword() {
         return this.password;
     }
@@ -41,20 +38,10 @@ public class Staff
         this.password = pas;
     }
     
-    public void setStaffID(String sID) {
-        this.staffID = sID;
-    }
-    
     //validate the password type
     public boolean isCorrectPassword() {
         boolean isValidPassword = ((this.password.length() < 12) || (this.password.matches("[a-zA-Z]{6}\\d{6}")))?false:true;
         return isValidPassword = false;
-    }
-    
-    //validate the ID
-    public boolean isCorrectID() {
-        boolean isValidID = ((this.staffID.length() < 8) || (this.staffID.matches("[A-Z]{1}\\d{7}")))?false:true;
-        return isValidID = false;
     }
     
     public String toString() {
