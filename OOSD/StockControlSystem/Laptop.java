@@ -2,8 +2,8 @@
 /**
  * Write a description of class Laptop here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @Student Name: Anson Ling Guang Cheng
+ * @Student Number: D22124534
  */
 public class Laptop extends Inventory
 {
@@ -15,8 +15,8 @@ public class Laptop extends Inventory
         this.brand = "";
     }
     
-    public Laptop(int nOS, double p, String tOL, String b) {
-        super(nOS,p);
+    public Laptop(String nP, int nOS, double p, String tOL, String b) {
+        super(nP,nOS,p);
         this.tyOfLap = tOL;
         this.brand = b;
     }
@@ -35,6 +35,10 @@ public class Laptop extends Inventory
     
     public void setBrand(String b) {
         this.brand = b;
+    }
+    
+    public int addStock() {
+        return this.numOfStock;
     }
     
     public double calculateTax() {

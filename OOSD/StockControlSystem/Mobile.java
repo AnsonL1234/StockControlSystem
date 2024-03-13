@@ -2,8 +2,8 @@
 /**
  * Write a description of class Mobile here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @Student Name: Anson Ling Guang Cheng
+ * @Student Number: D22124534
  */
 public class Mobile extends Inventory
 {
@@ -15,8 +15,8 @@ public class Mobile extends Inventory
         this.brand = "";
     }
     
-    public Mobile(int nOS, double p, String tOM, String b) {
-        super(nOS,p);
+    public Mobile(String nP,int nOS, double p, String tOM, String b) {
+        super(nP,nOS,p);
         this.tyOfMob = tOM;
         this.brand = b;
     }
@@ -37,8 +37,12 @@ public class Mobile extends Inventory
         this.brand = b;
     }
     
+    public int addStock() {
+        return this.numOfStock;
+    }
+    
     public double calculateTax() {
-        return this.prices += (1 * 0.23);
+        return this.prices *= (1 + 0.23);
     }
     
     public String toString() {

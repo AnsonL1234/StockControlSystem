@@ -2,18 +2,23 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 
 /**
  * Write a description of class Main here.
  *
- * @author (your name)
- * @version (a version number or a date)
+ * @Student Name: Anson Ling Guang Cheng
+ * @Student Number: D22124534
  */
 public class Main implements Serializable
 {
     ArrayList<Inventory> list;
     
     public Main() {
+        list = new ArrayList<Inventory>();
         mainMenu();
     }
     
@@ -86,10 +91,12 @@ public class Main implements Serializable
             } catch (NumberFormatException e) {
                 System.out.println("\n**** Incorrect Option ****");
                 isValidCustumerOption = false;
+                scan.next();//clear the scanner
             }
             switch (customerOption) {
                 case 1:cusrtomerOption1();break;
                 case 2:cusrtomerOption2();break;
+                case 5:mainMenu();break;
             }
         } while ((customerOption != 5) || !isValidCustumerOption);
         System.out.println("==========================");
@@ -102,31 +109,49 @@ public class Main implements Serializable
         System.out.println("**** Mobile Sales List ***");
         for (Inventory each: list) {
             mobile = (Mobile) each;
-            if (mobile != null) {
-                System.out.println("\n==========================");
-                System.out.println(mobile.toString());
-            } else {
-                System.out.println("No stock on list");
-            }
         }
+        if (mobile != null) {
+                System.out.println("\n==========================");
+                try {
+                    BufferedReader reader = new BufferedReader (new FileReader("StockInventory\\StockInventory.csv"));
+                    String line = "";
+                    while ((line == reader.readLine())) {
+                        System.out.println(reader.readLine());
+                        reader.close(); //close the reader
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("\n*** No stock on list ***\n");
+            }
         System.out.println("*********** End **********");
         System.out.println("==========================");
     }
     
-    // 6. customer menu option 2 - display all the laptop that is for sale
+    // 7. customer menu option 2 - display all the laptop that is for sale
     public void cusrtomerOption2() {
         Laptop laptop = null;
         System.out.println("==========================");
         System.out.println("**** Laptop Sales List ***");
         for (Inventory each: list) {
             laptop = (Laptop) each;
-            if (laptop != null) {
-                System.out.println("\n==========================");
-                System.out.println(laptop.toString());
-            } else {
-                System.out.println("No stock on list");
-            }
         }
+        if (laptop != null) {
+                System.out.println("\n==========================");
+                try {
+                    BufferedReader reader = new BufferedReader (new FileReader("StockInventory\\StockInventory.csv"));
+                    String line = "";
+                    while ((line == reader.readLine())) {
+                        System.out.println(reader.readLine());
+                        reader.close(); //close the reader
+                    }
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("\n*** No stock on list ***\n");
+            }
         System.out.println("*********** End **********");
         System.out.println("==========================");
     }

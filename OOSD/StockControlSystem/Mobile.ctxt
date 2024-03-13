@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=Mobile
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Mobile\ here.\r\n\r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Mobile\ here.\r\n\r\n\ @Student\ Name\:\ Anson\ Ling\ Guang\ Cheng\r\n\ @Student\ Number\:\ D22124534\r\n
 comment1.params=
 comment1.target=Mobile()
-comment2.params=nOS\ p\ tOM\ b
-comment2.target=Mobile(int,\ double,\ java.lang.String,\ java.lang.String)
+comment2.params=nP\ nOS\ p\ tOM\ b
+comment2.target=Mobile(java.lang.String,\ int,\ double,\ java.lang.String,\ java.lang.String)
 comment3.params=
 comment3.target=java.lang.String\ getTyOfMob()
 comment4.params=
@@ -14,7 +14,9 @@ comment5.target=void\ setTyOfMob(java.lang.String)
 comment6.params=b
 comment6.target=void\ setBrand(java.lang.String)
 comment7.params=
-comment7.target=double\ calculateTax()
+comment7.target=int\ addStock()
 comment8.params=
-comment8.target=java.lang.String\ toString()
-numComments=9
+comment8.target=double\ calculateTax()
+comment9.params=
+comment9.target=java.lang.String\ toString()
+numComments=10
