@@ -9,6 +9,8 @@ public class Mobile extends Inventory
 {
     private String tyOfMob;
     private String brand;
+    private String modelMob;
+    private int memoryOp;
     
     public Mobile() {
         this.tyOfMob = "";

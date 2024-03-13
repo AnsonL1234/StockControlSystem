@@ -9,6 +9,8 @@ public class Laptop extends Inventory
 {
     private String tyOfLap;
     private String brand;
+    private String modelLap;
+    private int memoryOp;
     
     public Laptop() {
         this.tyOfLap = "";

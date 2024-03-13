@@ -15,6 +15,7 @@ import java.io.FileReader;
  */
 public class Main implements Serializable
 {
+    private final String finalFile = "StockInventory\\StockInventory.csv";
     ArrayList<Inventory> list;
     
     public Main() {
@@ -114,7 +115,7 @@ public class Main implements Serializable
         if (mobile != null) {
                 System.out.println("\n==========================");
                 try {
-                    BufferedReader reader = new BufferedReader (new FileReader("StockInventory\\StockInventory.csv"));
+                    BufferedReader reader = new BufferedReader (new FileReader(this.finalFile));
                     String line = "";
                     while ((line == reader.readLine())) {
                         System.out.println(reader.readLine());
@@ -141,7 +142,7 @@ public class Main implements Serializable
         if (laptop != null) {
                 System.out.println("\n==========================");
                 try {
-                    BufferedReader reader = new BufferedReader (new FileReader("StockInventory\\StockInventory.csv"));
+                    BufferedReader reader = new BufferedReader (new FileReader(this.finalFile));
                     String line = "";
                     while ((line == reader.readLine())) {
                         System.out.println(reader.readLine());
@@ -180,7 +181,7 @@ public class Main implements Serializable
         return isValidPassword = false;
     }
     /** 11. menu option 2 - end here **/
-    
+
     /** main method **/
     public static void main(String[] args) {
         

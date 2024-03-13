@@ -5,12 +5,11 @@ import java.io.*;
  * @Student Name: Anson Ling Guang Cheng
  * @Student Number: D22124534
  */
-public abstract class Inventory implements Serializable
+public class Inventory implements Serializable
 {
     private String nameProducts;
     protected int numOfStock;
     protected double prices;
-
     
     public Inventory() {
         this.nameProducts = "";
