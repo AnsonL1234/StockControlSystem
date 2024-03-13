@@ -56,6 +56,7 @@ public class Main implements Serializable
             }
             switch (menuOption) {
                 case 1: customerOption1();break;
+                case 2: menuption2();break;
             }
         } while ((menuOption != 3) || !isValidOption);
         System.out.println("==========================");
@@ -122,9 +123,9 @@ public class Main implements Serializable
                 }catch (Exception e) {
                     e.printStackTrace();
                 }
-            } else {
-                System.out.println("\n*** No stock on list ***\n");
-            }
+        } else {
+            System.out.println("\n*** No stock on list ***\n");
+        }
         System.out.println("*********** End **********");
         System.out.println("==========================");
     }
@@ -156,6 +157,29 @@ public class Main implements Serializable
         System.out.println("==========================");
     }
     /** 5. menu option 1 - end here **/
+    
+    /** 11. menu option 2 **/
+    public void menuption2() {
+        System.out.println("==========================");
+        System.out.println("******* Staff Menu *******");
+        System.out.println("==========================");
+    }
+    
+    public void askThePassword() {
+        Scanner scan = new Scanner(System.in);
+        String password = "";
+        int count;
+        System.out.print("Enter the password: ");
+        password = scan.next();
+        
+    }
+    
+    //validate the password type
+    public boolean isCorrectPassword(String password) {
+        boolean isValidPassword = ((password.length() < 12) || (password.charAt(0) != 'D' || password.charAt(0) != 'C'))?false:true;
+        return isValidPassword = false;
+    }
+    /** 11. menu option 2 - end here **/
     
     /** main method **/
     public static void main(String[] args) {

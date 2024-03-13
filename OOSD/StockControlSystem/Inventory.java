@@ -48,9 +48,9 @@ public abstract class Inventory implements Serializable
         this.prices = p;
     }
     
-    public abstract int addStock();
+    //public abstract int addStock();
     
-    public abstract double calculateTax();
+    //public abstract double calculateTax();
     
     public String toString() {
         return "Stock: " + this.numOfStock + "\nPrices: " + this.prices;
