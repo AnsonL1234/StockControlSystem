@@ -35,10 +35,6 @@ public class Inventory implements Serializable
     public void setPrices(double p) {
         this.prices = p;
     }
-
-    public void calculateTotalPrices() {
-        this.numOfStock += this.prices;
-    }
     
     public String toString() {
         return "Stock: " + this.numOfStock + "\nPrices: " + this.prices;
