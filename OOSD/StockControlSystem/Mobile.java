@@ -19,8 +19,8 @@ public class Mobile extends Inventory
         this.memoryOp = "";
     }
     
-    public Mobile(String nP,int nOS, double p, String tOM, String b, String medM, String mmrOp) {
-        super(nP,nOS,p);
+    public Mobile(String tOM, String b, String medM, String mmrOp, int nOS, double p) {
+        super(nOS,p);
         this.tyOfMob = tOM;
         this.brand = b;
         this.modelMob =medM;
@@ -58,16 +58,8 @@ public class Mobile extends Inventory
         this.brand = b;
     }
     
-    public int addStock() {
-        return this.numOfStock;
-    }
-    
-    public double calculateTax() {
-        return this.prices *= (1 + 0.23);
-    }
-    
-    public void brand() {
-        
+    public void calculateTotalPrices(double prices) {
+        this.prices = prices;
     }
     
     public String toString() {

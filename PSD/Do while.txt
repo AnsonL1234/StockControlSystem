@@ -1,0 +1,10 @@
+do {
+            System.out.print("Input password(create): ");
+            crePas = scan.nextLine();
+            if (isCorrectPassword(crePas)) 
+                System.out.println("\n*** Incorrect password type ***");
+            else {
+                System.out.println("*** Password has been create successfully ***");
+                //System.out.println("TEXT: " + staff.getPassword());
+            }
+        }while (isCorrectPassword(crePas));

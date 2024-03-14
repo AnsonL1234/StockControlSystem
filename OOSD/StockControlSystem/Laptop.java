@@ -7,35 +7,35 @@
  */
 public class Laptop extends Inventory
 {
-    private String tyOfLap;
+    private String tyOfProduct;
     private String brand;
     private String modelLap;
     private String memoryOp;
     
     public Laptop() {
-        this.tyOfLap = "";
+        this.tyOfProduct = "";
         this.brand = "";
         this.modelLap = "";
         this.memoryOp = "";
     }
     
-    public Laptop(String nP, int nOS, double p, String tOL, String b, String mL, String mO) {
-        super(nP,nOS,p);
-        this.tyOfLap = tOL;
+    public Laptop(String tOL, String b, String mL, String mO, int nOS, double p) {
+        super(nOS,p);
+        this.tyOfProduct = tOL;
         this.brand = b;
         this.modelLap = mL;
         this.memoryOp = mO;
     }
     
     public Laptop(String tOL, String b, String mL, String mO) {
-        this.tyOfLap = tOL;
+        this.tyOfProduct = tOL;
         this.brand = b;
         this.modelLap = mL;
         this.memoryOp = mO;
     }
     
     public String getTyOfLap() {
-        return this.tyOfLap;
+        return this.tyOfProduct;
     }
     
     public String getBrand() {
@@ -51,7 +51,7 @@ public class Laptop extends Inventory
     }
     
     public void setTyOfMob(String tOL) {
-        this.tyOfLap = tOL;
+        this.tyOfProduct = tOL;
     }
     
     public void setBrand(String b) {
@@ -67,7 +67,7 @@ public class Laptop extends Inventory
     }
     
     public String toString() {
-        return "Type of Mobile: " + this.tyOfLap +
+        return "Type of Mobile: " + this.tyOfProduct +
         "\nBrand: " + this.brand + 
         "\nStock and Prices Detail...\n" + super.toString();
     }
