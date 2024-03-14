@@ -15,10 +15,11 @@ import java.io.FileReader;
  */
 public class Main implements Serializable
 {
-    private final String finalFile = "StockInventory\\StockInventory.csv";
-    ArrayList<Inventory> list;
+    private static final String adminPassword = "Admin123";
+    private final String finalFile = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.csv";
+    ArrayList<Inventory> list; 
     ArrayList<Staff> sList;
-
+    
     public Main() {
         list = new ArrayList<Inventory>();
         sList = new ArrayList<Staff>();
@@ -122,7 +123,7 @@ public class Main implements Serializable
                 while ((line == reader.readLine())) {
                     System.out.println(reader.readLine());
                     reader.close(); //close the reader
-                }
+                }   
             }catch (Exception e) {
                 e.printStackTrace();
             }
@@ -173,31 +174,24 @@ public class Main implements Serializable
 
     public void askThePassword() {
         Scanner scan = new Scanner(System.in);
-        Staff staff = null;
-        String password = "", creAvatar = "";
+        String password = "";
         int count = 0;
-        System.out.print("Enter the password: ");
-        password = scan.next();
-        System.out.println("Did you wish to create a avatar? (y/n):");
-        creAvatar = scan.nextLine();
-        staff = searchPassword(password);
-        if (count >= 3) {
-            System.out.println("\nYou have use all the " + count + " attempts");
-        } else {    
-            if (creAvatar.equalsIgnoreCase("y")) {
-                createPassword();
+        do {
+            System.out.print("\nEnter the password: ");
+            password = scan.next();
+            if(password.equals(adminPassword)) {
+                askStaffMenuOption();
             } else {
-                if (!password.equals(staff.getPassword())) {
-                    count++;
-                    System.out.println("\nIncorrect password - you have use " + count + " attempts");
-                } else {
-                    askStaffMenuOption();
-                }
+                count++;
+                System.out.println("*** Incorrect password ***");
             }
-        }
+            if (count >= 3) {
+                System.out.println("You have you all the " + count + " attempts");
+            }
+        } while (count != 3);
     }
 
-    public Staff searchPassword(String pas) {
+    /**public Staff searchPassword(String pas) {
         Staff staff = null;
         for (Staff each: sList) {
             if (pas.equals(each.getPassword())) {
@@ -206,10 +200,10 @@ public class Main implements Serializable
             }
         }
         return null;
-    }
+    }**/
 
     // ask staff to create password
-    public void createPassword() {
+    /**public void createPassword() {
         Scanner scan = new Scanner(System.in);
         Staff staff = null;
         String staName = "", staPass = "", staID ="";
@@ -233,7 +227,7 @@ public class Main implements Serializable
         
         staff = new Staff(staName,staPass,staID);
         sList.add(staff);
-    }
+    } **/
 
     //validate the password type
     public boolean isCorrectPassword(String crePas) {
@@ -268,14 +262,67 @@ public class Main implements Serializable
                 scan.next();//clear the scanner
             }
             switch (staffOption) {
+                case 1:staffMenuOption1();break;
                 case 4:mainMenu();break;
             }
         } while ((staffOption != 4) || !isValidStaffOption);
         System.out.println("==========================");
     }
-
     /** 11. menu option 2 - end here **/
-
+    
+    /** 12. staff menu option 1**/
+    public void staffMenuOption1() {
+        Scanner scan = new Scanner(System.in);
+        Mobile mobile = null;
+        String brand = "", model = "", memoryOption = "";
+        System.out.print("Enter the brand: ");
+        brand = scan.nextLine();
+        System.out.print("Enter the model: ");
+        model = scan.nextLine();
+        System.out.print("Enter the memoryOption: ");
+        memoryOption = scan.nextLine();
+        mobile = new Mobile("Mobile",brand,model,memoryOption);
+        list.add(mobile);
+        
+        String[] header = {"Type of Products","Brand","Model","Memory"};//put them in order
+        String separator = ",";
+        try (PrintWriter writer = new PrintWriter(new FileWriter(this.finalFile))){
+            
+            String[] line = {mobile.getTyOfMob(), mobile.getBrand(), mobile.getModelMob(), mobile.getMemoryOp()};
+            writer.println(String.join(separator,header)); 
+            //do {
+                writer.println(String.join(separator,line));
+            //}while (xy == 'y');
+            writer.close(); //close the writer
+        }catch(IOException e) {
+            e.printStackTrace();
+        } 
+    }
+    
+    public void staffMenuIOption2() {
+        Scanner scan = new Scanner(System.in);
+        Laptop laptop = null;
+        String brand = "", model = "", memory = "";
+        System.out.print("Enter the brand: ");
+        brand = scan.nextLine();
+        System.out.print("Enter the model: ");
+        model = scan.nextLine();
+        System.out.print("Enter the memoryOption: ");
+        memory = scan.nextLine();
+        laptop = new Laptop("Laptop",brand,model,memory);
+        list.add(laptop);
+        
+        String[] HeadList = {"Type of Products","Brand","Model","Memory"};
+        String splite = ",";
+        try (PrintWriter writer = new PrintWriter(new FileWriter(this.finalFile))) {
+            String[] item = {laptop.getTyOfLap(),laptop.getBrand(),laptop.getModelLap(),laptop.getMemoryOp()};
+            writer.println(String.join(splite,HeadList)); //seprate the head title data by ", " in order
+            writer.println(String.join(splite,item)); //seprate the actual value data by ", " in order
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
     public void exit() {
         Scanner scan = new Scanner(System.in);
         System.out.print("Press enter to go back/exits...");

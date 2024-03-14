@@ -10,17 +10,28 @@ public class Mobile extends Inventory
     private String tyOfMob;
     private String brand;
     private String modelMob;
-    private int memoryOp;
+    private String memoryOp;
     
     public Mobile() {
         this.tyOfMob = "";
         this.brand = "";
+        this.modelMob = "";
+        this.memoryOp = "";
     }
     
-    public Mobile(String nP,int nOS, double p, String tOM, String b) {
+    public Mobile(String nP,int nOS, double p, String tOM, String b, String medM, String mmrOp) {
         super(nP,nOS,p);
         this.tyOfMob = tOM;
         this.brand = b;
+        this.modelMob =medM;
+        this.memoryOp =mmrOp;
+    }
+    
+    public Mobile(String tOM, String b, String medM, String mmrOp) {
+        this.tyOfMob = tOM;
+        this.brand = b;
+        this.modelMob =medM;
+        this.memoryOp =mmrOp;
     }
     
     public String getTyOfMob() {
@@ -29,6 +40,14 @@ public class Mobile extends Inventory
     
     public String getBrand() {
         return this.brand;
+    }
+    
+    public String getModelMob() {
+        return this.modelMob;
+    }
+    
+    public String getMemoryOp() {
+        return this.memoryOp;
     }
     
     public void setTyOfMob(String tOM) {
@@ -45,6 +64,10 @@ public class Mobile extends Inventory
     
     public double calculateTax() {
         return this.prices *= (1 + 0.23);
+    }
+    
+    public void brand() {
+        
     }
     
     public String toString() {

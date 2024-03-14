@@ -1,4 +1,5 @@
-/**
+
+    /**
  * Write a description of class Staff here.
  *
  * @author (your name)
@@ -37,12 +38,12 @@ public class Staff
         this.staffName = sN;
     }
     
-    public void setPassword(String pas) {
-        this.password = pas;
-    }
-    
     public void setStaffID(String sID) {
         this.staffID = sID;
+    }
+    
+    public void setPassword(String pas) {
+        this.password = pas;
     }
     
     //validate the password type
@@ -51,9 +52,9 @@ public class Staff
         return isValidPassword = false;
     }
     
-    //validate the ID
+    //validate the password type
     public boolean isCorrectID() {
-        boolean isValidID = ((this.staffID.length() < 8) || (this.staffID.matches("[A-Z]{1}\\d{7}")))?false:true;
+        boolean isValidID = ((this.staffID.length() < 8) || (this.password.matches("[A-Z]{1}\\d{7}")))?false:true;
         return isValidID = false;
     }
     
@@ -61,3 +62,4 @@ public class Staff
         return "Name: " + this.staffName + "\nStaff ID: " +this.staffID;
     }
 }
+
