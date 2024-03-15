@@ -48,14 +48,12 @@ public class Staff
     
     //validate the password type
     public boolean isCorrectPassword() {
-        boolean isValidPassword = ((this.password.length() < 12) || (this.password.matches("[a-zA-Z]{6}\\d{6}")))?false:true;
-        return isValidPassword = false;
-    }
-    
-    //validate the password type
-    public boolean isCorrectID() {
-        boolean isValidID = ((this.staffID.length() < 8) || (this.password.matches("[A-Z]{1}\\d{7}")))?false:true;
-        return isValidID = false;
+        boolean isValidPassword = true;
+        if (this.password.length() <= 6 || this.password.length() >= 8) 
+            isValidPassword = false;
+        else if (this.password.charAt(0) != 'A' && this.password.charAt(0) != 'Z')
+            isValidPassword = false;
+        return isValidPassword;
     }
     
     public String toString() {
