@@ -148,17 +148,16 @@ public class Main implements Serializable
         System.out.print("\f");
         System.out.println("==========================");
         System.out.println("**** Mobile Sales List ***\n");
+        
         for (Inventory each: list) {
-            mobile = (Mobile) each;
-            if (mobile != null) {
+            //if (mobile instanceof Mobile) {
+                mobile = (Mobile) each;
                 System.out.println(mobile.toString());
                 System.out.println("\n==========================\n");
-            } else {
-                System.out.println("\n*** No stock on list ***\n");
-            }
+            //} 
         }
         
-        System.out.println("*********** End **********");
+        System.out.println("***********SSS End **********");
         System.out.println("==========================");
         exit();
     }
@@ -171,11 +170,13 @@ public class Main implements Serializable
         System.out.println("==========================");
         System.out.println("**** Laptop Sales List ***\n");
         for (Inventory each: list) {
-            laptop = (Laptop) each;
-            if (laptop != null) {
-                System.out.println(laptop.toString());
-            } else {
-                System.out.println("\n*** No stock on list ***\n");
+            if (laptop instanceof Laptop) {
+                laptop = (Laptop) each;
+                if (laptop != null) {
+                    System.out.println(laptop.toString());
+                } else {
+                    System.out.println("\n*** No stock on list ***\n");
+                }
             }
         }
         
@@ -365,8 +366,9 @@ public class Main implements Serializable
         Scanner scan = new Scanner(System.in);
         int staffOption = 0;
         boolean isValidStaffOption = true;
-        System.out.print("\f");
+        
         do {
+            System.out.print("\f");
             displayStaffMenu();
             try {
                 System.out.print("\nPick the option : ");
