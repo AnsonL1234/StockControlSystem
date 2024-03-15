@@ -144,20 +144,18 @@ public class Main implements Serializable
     
     /** 6. customer menu option 1 - display all the mobile that is for sale **/
     public void cusrtomerOption1() {
-        Mobile mobile = null;
         System.out.print("\f");
         System.out.println("==========================");
         System.out.println("**** Mobile Sales List ***\n");
         
         for (Inventory each: list) {
-            //if (mobile instanceof Mobile) {
-                mobile = (Mobile) each;
-                System.out.println(mobile.toString());
+            if (each instanceof Mobile) {
+                System.out.println(each.toString());
                 System.out.println("\n==========================\n");
-            //} 
+            } 
         }
         
-        System.out.println("***********SSS End **********");
+        System.out.println("*********** End **********");
         System.out.println("==========================");
         exit();
     }
@@ -165,18 +163,13 @@ public class Main implements Serializable
 
     /** 7. customer menu option 2 - display all the laptop that is for sale **/
     public void cusrtomerOption2() {
-        Laptop laptop = null;
         System.out.print("\f");
         System.out.println("==========================");
         System.out.println("**** Laptop Sales List ***\n");
         for (Inventory each: list) {
-            if (laptop instanceof Laptop) {
-                laptop = (Laptop) each;
-                if (laptop != null) {
-                    System.out.println(laptop.toString());
-                } else {
-                    System.out.println("\n*** No stock on list ***\n");
-                }
+            if (each instanceof Laptop) {
+                System.out.println(each.toString());
+                System.out.println("\n==========================\n");
             }
         }
         
@@ -219,8 +212,8 @@ public class Main implements Serializable
                     System.out.println("Quantity: " + quantity);
                     System.out.println(" ");
                     System.out.println("**************************");
-                    System.out.println(" ");
-                    System.out.println("\nTotal: " + totalPrices);
+                    System.out.println("\nPrices : " + mobile.getPrices());
+                    System.out.println("Total  : " + totalPrices);
                     System.out.println("==========================");
                     updateTextFile(HeadList);
                 }else if (ans.equalsIgnoreCase("n")) {
@@ -267,8 +260,8 @@ public class Main implements Serializable
                     System.out.println("Quantity: " + quantity);
                     System.out.println(" ");
                     System.out.println("**************************");
-                    System.out.println(" ");
-                    System.out.println("\nTotal: " + totalPrices);
+                    System.out.println("\nPrices: " + laptop.getPrices());
+                    System.out.println("Total : " + totalPrices);
                     System.out.println("==========================");
                     updateTextFile(HeadList);
                 }else if (ans.equalsIgnoreCase("n")) {
@@ -280,7 +273,7 @@ public class Main implements Serializable
         }
         exit();
     }
-     /** 9. customer menu option 4 - end here **/
+    /** 9. customer menu option 4 - end here **/
     
 
     /** 11. staff menu **/
@@ -444,6 +437,7 @@ public class Main implements Serializable
         System.out.print("Did you wish to process the adding(y/n)? ");
         ans = scan.nextLine();
         if (ans.equalsIgnoreCase("y")) {
+            System.out.println("\nThe item has been store!");
             updateTextFile(HeadList);
         } else if (ans.equalsIgnoreCase("n")) {
             System.out.println("\n*** The item adding is cancel ***");
@@ -475,6 +469,8 @@ public class Main implements Serializable
                 setMobileStockAndPrices(mobile);
                 updateTextFile(HeadList);
                 System.out.println("\nNew stock is been delivered!");
+            } else {
+                System.out.println("The device is not found - couldn't process");
             }
         } else if (typeOfProd.equalsIgnoreCase("laptop")) {
             System.out.print("Enter the brand: ");
@@ -487,6 +483,8 @@ public class Main implements Serializable
                 setLaptopStockAndPrices(laptop);
                 updateTextFile(HeadList);
                 System.out.println("\nNew stock is been delivered!");
+            } else {
+                System.out.println("The device is not found - couldn't process");
             }
         } else {
             System.out.println("Incorrect products - only mobile/laptop");
