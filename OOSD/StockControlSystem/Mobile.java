@@ -65,6 +65,6 @@ public class Mobile extends Inventory
     public String toString() {
         return "Type of Mobile: " + this.tyOfMob +
         "\nBrand: " + this.brand + 
-        "\nStock and Prices Detail...\n" + super.toString();
+        "\n\nStock and Prices Detail...\n\n" + super.toString();
     }
 }

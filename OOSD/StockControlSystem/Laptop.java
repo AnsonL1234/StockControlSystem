@@ -69,6 +69,6 @@ public class Laptop extends Inventory
     public String toString() {
         return "Type of Mobile: " + this.tyOfProduct +
         "\nBrand: " + this.brand + 
-        "\nStock and Prices Detail...\n" + super.toString();
+        "\n\nStock and Prices Detail...\n\n" + super.toString();
     }
 }

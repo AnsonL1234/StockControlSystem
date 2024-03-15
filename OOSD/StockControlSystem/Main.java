@@ -71,6 +71,7 @@ public class Main implements Serializable
     
     /** 5. menu option 1 **/
     public void customerOption1() {
+        System.out.print("\f");
         askCustomerMenuOption();
     }
 
@@ -133,15 +134,16 @@ public class Main implements Serializable
                 }
             }
             writer.close();
-            }catch (IOException e) {
-                System.out.println("\nThere is an error with the file...");
-                e.printStackTrace();
-            }
+        }catch (IOException e) {
+            System.out.println("\nThere is an error with the file...");
+            e.printStackTrace();
+        }
     }
     
     /** 6. customer menu option 1 - display all the mobile that is for sale **/
     public void cusrtomerOption1() {
         Mobile mobile = null;
+        System.out.print("\f");
         System.out.println("==========================");
         System.out.println("**** Mobile Sales List ***\n");
         for (Inventory each: list) {
@@ -163,6 +165,7 @@ public class Main implements Serializable
     /** 7. customer menu option 2 - display all the laptop that is for sale **/
     public void cusrtomerOption2() {
         Laptop laptop = null;
+        System.out.print("\f");
         System.out.println("==========================");
         System.out.println("**** Laptop Sales List ***\n");
         for (Inventory each: list) {
@@ -186,6 +189,7 @@ public class Main implements Serializable
         Mobile mobile = null;
         String brand = "", model = "", ans = "";
         int quantity = 0;
+        System.out.print("\f");
         System.out.print("Enter the brand: ");
         brand = scan.nextLine();
         System.out.print("Enter the model: ");
@@ -223,6 +227,7 @@ public class Main implements Serializable
                 }
             }
         }
+        exit();
     }
     /** 8. customer menu option 3 - end here **/
     
@@ -232,6 +237,7 @@ public class Main implements Serializable
         Laptop laptop = null;
         String brand = "", model = "", ans = "";
         int quantity = 0;
+        System.out.print("\f");
         System.out.print("Enter the brand: ");
         brand = scan.nextLine();
         System.out.print("Enter the model: ");
@@ -269,12 +275,14 @@ public class Main implements Serializable
                 }
             }
         }
+        exit();
     }
      /** 9. customer menu option 4 - end here **/
     
 
     /** 11. staff menu **/
     public void menuOption2() {
+        System.out.print("\f");
         System.out.println("==========================");
         System.out.println("******* Staff Login ******");
         System.out.println("==========================");
@@ -287,7 +295,7 @@ public class Main implements Serializable
         int count = 0;
         do {
             System.out.print("\nEnter the password: ");
-            password = scan.next();
+            password = scan.nextLine();
             if(password.equals(adminPassword)) {
                 askStaffMenuOption(HeadList);
             } else {
@@ -337,12 +345,6 @@ public class Main implements Serializable
         staff = new Staff(staName,staPass,staID);
         sList.add(staff);
     } **/
-
-    //validate the password type
-    public boolean isCorrectPassword(String crePas) {
-        boolean isValidPassword = ((crePas.length() < 12) || (crePas.matches("[a-zA-Z]{6}\\d{6}")))?false:true;
-        return isValidPassword = false;
-    }
     
     public void displayStaffMenu() {
         System.out.println("==========================");
@@ -361,6 +363,7 @@ public class Main implements Serializable
         Scanner scan = new Scanner(System.in);
         int staffOption = 0;
         boolean isValidStaffOption = true;
+        System.out.print("\f");
         do {
             displayStaffMenu();
             try {
@@ -391,6 +394,7 @@ public class Main implements Serializable
         int numOfAsk = 0;
         boolean isCorrectOP = true;
         
+        System.out.print("\f");
         System.out.print("\nEnter the brand  : ");
         brand = scan.nextLine();
         System.out.print("Enter the model  : ");
@@ -408,7 +412,7 @@ public class Main implements Serializable
             updateTextFile(HeadList); 
         } else if (ans.equalsIgnoreCase("n")) {
             System.out.println("\n*** The item adding is cancel ***");
-            //just reading it from the text file
+            //else just reading it from the text file
             try {
                 FileReader reader = new FileReader(this.finalFile);
             }catch(IOException e) {
@@ -417,6 +421,7 @@ public class Main implements Serializable
         } else {
             System.out.println("\n*** Incorrect option, the adding couldn't process ***");
         }
+        exit();
     }
     /** 12. staff menu option 1 - end here **/
     
@@ -426,6 +431,7 @@ public class Main implements Serializable
         Laptop laptop = null;
         String brand = "", model = "", memory = "", ans = "";
         
+        System.out.print("\f");
         System.out.print("\nEnter the brand  : ");
         brand = scan.nextLine();
         System.out.print("Enter the model  : ");
@@ -456,6 +462,7 @@ public class Main implements Serializable
         Mobile mobile = null;
         Laptop laptop = null;
         String typeOfProd = "", brand = "", model = "";
+        System.out.print("\f");
         System.out.print("Input the type of products: ");
         typeOfProd = scan.nextLine();
         
@@ -469,6 +476,7 @@ public class Main implements Serializable
                 System.out.println("\n*** found the device ***");
                 setMobileStockAndPrices(mobile);
                 updateTextFile(HeadList);
+                System.out.println("\nNew stock is been delivered!");
             }
         } else if (typeOfProd.equalsIgnoreCase("laptop")) {
             System.out.print("Enter the brand: ");
@@ -480,10 +488,12 @@ public class Main implements Serializable
                 System.out.println("\n*** found the device ***");
                 setLaptopStockAndPrices(laptop);
                 updateTextFile(HeadList);
+                System.out.println("\nNew stock is been delivered!");
             }
         } else {
             System.out.println("Incorrect products - only mobile/laptop");
         }
+        exit();
     }
     
     // pure module for asking the stock and prices for mobile
@@ -526,20 +536,19 @@ public class Main implements Serializable
     
     /** pure module for search the laptop **/
     public Laptop searchLaptopProducts(String brand, String model) {
-        Laptop laptop = null, laptops = null;
+        Laptop laptop = null;
         for (Inventory each: list) {
             if (each instanceof Laptop) {
                 laptop = (Laptop)each;
                 if (brand.equalsIgnoreCase(laptop.getBrand()) && model.equalsIgnoreCase(laptop.getModelLap())) {
-                    laptops = (Laptop)each;
-                    return laptops;
+                    return laptop;
                 }
             } 
         }
         return null;
     }
     
-    /** pure module for press continue **/
+    /** 15. & 16. pure module for press go back and exit **/
     public void exit() {
         Scanner scan = new Scanner(System.in);
         System.out.print("Press enter to go back/exits...");
