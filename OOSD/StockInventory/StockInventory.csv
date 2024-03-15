@@ -1,2 +1,4 @@
-Column1,Column2,Column3,Column4
-Item Num,Item Brand,Stock,prices
+Type of Products,Brand,Model,Memory,Stock,Prices
+Mobile,Samsung,note 23,128Gb,0,0.0
+Mobile,Apple,ip12,256GB,18,1200.0
+Mobile,asds,asd,asd,0,0.0
