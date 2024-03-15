@@ -58,10 +58,6 @@ public class Mobile extends Inventory
         this.brand = b;
     }
     
-    public void calculateTotalPrices(double prices) {
-        this.prices = prices;
-    }
-    
     public String toString() {
         return "Type of Mobile: " + this.tyOfMob +
         "\nBrand: " + this.brand + 

@@ -17,6 +17,7 @@ public class Main implements Serializable
 {
     private static final String adminPassword = "Admin123";
     private final String finalFile = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.csv";
+    private final String finalFile2 = "C:\\Users\\D22124534\\Desktop\\Final Assignment\\StockControlSystem\\OOSD\\StockInventory\\StockInventory.csv";
     private final String[] HeadList = {"Type of Products","Brand","Model","Memory","Stock","Prices"};
     ArrayList<Inventory> list; 
     ArrayList<Staff> sList;
@@ -97,7 +98,7 @@ public class Main implements Serializable
                 System.out.print("\nPick the option : ");
                 customerOption = scan.nextInt();
                 isValidCustumerOption = true;
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("\n**** Incorrect Option ****");
                 isValidCustumerOption = false;
                 scan.next();//clear the scanner
@@ -118,7 +119,7 @@ public class Main implements Serializable
     /** pure module for updating the file **/
     public void updateTextFile(String[] HeadList) {
         String splite = ",";
-        try (PrintWriter writer = new PrintWriter(new FileWriter(this.finalFile))) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(this.finalFile2))) {
             writer.println(String.join(splite,HeadList)); //the header of all data
                 
             // check everthing value on the list and add it to the text file
@@ -414,7 +415,7 @@ public class Main implements Serializable
             System.out.println("\n*** The item adding is cancel ***");
             //else just reading it from the text file
             try {
-                FileReader reader = new FileReader(this.finalFile);
+                FileReader reader = new FileReader(this.finalFile2);
             }catch(IOException e) {
                 e.printStackTrace();
             }

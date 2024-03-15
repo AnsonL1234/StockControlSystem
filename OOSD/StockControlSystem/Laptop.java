@@ -58,14 +58,6 @@ public class Laptop extends Inventory
         this.brand = b;
     }
     
-    public int addStock() {
-        return this.numOfStock;
-    }
-    
-    public double calculateTax() {
-        return this.prices += (1 * 0.23);
-    }
-    
     public String toString() {
         return "Type of Mobile: " + this.tyOfProduct +
         "\nBrand: " + this.brand + 
