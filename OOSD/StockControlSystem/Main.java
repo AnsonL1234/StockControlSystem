@@ -15,7 +15,7 @@ import java.io.FileReader;
  */
 public class Main implements Serializable
 {
-    private static final String adminPassword = "Admin123";
+    //private static final String adminPassword = "Admin123";
 
     //my own destop version
     private final String finalFile = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.csv";
@@ -510,7 +510,7 @@ public class Main implements Serializable
                 System.out.println("\nThe " + model + " is not found - couldn't process");
             }
         } else { // if not both of them
-            System.out.println("\nIncorrect products - only mobile/laptop");
+            System.out.println("\nNo products found - only mobile/laptop at the moment");
         }
         exit();
     }
