@@ -314,6 +314,8 @@ public class Main implements Serializable
         
         // if it not null validate the password
         if (staff != null) {
+            System.out.println("TEXT: " + staff.getPassword());
+            scan.next(); //stop here
             if (count >= 3) {
                 System.out.println("You have use all " + count + " attepmts!");
             } else {
@@ -326,6 +328,7 @@ public class Main implements Serializable
                 }
             }
         } else if (staff == null){ // if is null create a new password
+            //System.out.println("TEXT2: " + staff.getPassword());
             System.out.println("\n\nNo account found - please film the form");
             createPassword();
         }
@@ -335,7 +338,7 @@ public class Main implements Serializable
     public Staff searchPassword(String pas) {
         Staff staff = null;
         for (Staff each: sList) {
-            if (pas.equals(each.getPassword())) {
+            if (pas.equalsIgnoreCase(each.getPassword())) {
                 staff = each;
                 return staff;
             }
@@ -414,9 +417,9 @@ public class Main implements Serializable
         //enter the brand, model, option
         System.out.print("\nEnter the brand  : ");
         brand = scan.nextLine();
-        System.out.print("Enter the model  : ");
+        System.out.print("\nEnter the model  : ");
         model = scan.nextLine();
-        System.out.print("Enter the memoryOption  : ");
+        System.out.print("\nEnter the memoryOption  : ");
         memoryOption = scan.nextLine();
 
 
@@ -424,7 +427,7 @@ public class Main implements Serializable
         mobile = new Mobile("Mobile",brand,model,memoryOption);
         list.add(mobile);
 
-        System.out.print("Did you wish to process(y/n)? ");
+        System.out.print("\nDid you wish to process(y/n)? ");
         ans = scan.nextLine();
         if (ans.equalsIgnoreCase("y")) { // if yes add the product and update text file
             updateTextFile(); 
