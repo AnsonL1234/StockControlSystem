@@ -5,7 +5,7 @@ import java.io.*;
  * @Student Name: Anson Ling Guang Cheng
  * @Student Number: D22124534
  */
-public class Inventory implements Serializable
+public abstract class Inventory implements Serializable
 {
     protected int numOfStock;
     protected double prices;
@@ -37,6 +37,10 @@ public class Inventory implements Serializable
     }
     
     public String toString() {
-        return "Stock: " + this.numOfStock + "\nPrices: " + this.prices;
+        return 
+        "\nStock    : " + this.numOfStock + 
+        "\nPrices   : " + this.prices;
     }
+    
+    public abstract String toStockString();
 }

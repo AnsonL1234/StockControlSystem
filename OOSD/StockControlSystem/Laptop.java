@@ -59,8 +59,19 @@ public class Laptop extends Inventory
     }
     
     public String toString() {
-        return "Type of Mobile: " + this.tyOfProduct +
-        "\nBrand: " + this.brand + 
-        "\n\nStock and Prices Detail...\n\n" + super.toString();
+        return 
+        "Products : " + this.tyOfProduct +
+        "\nBrand    : " + this.brand + 
+        "\nModel    : " + this.modelLap +
+        "\nMemory   : " + this.memoryOp;
+    }
+    
+    public String toStockString() {
+        return 
+        "Products : " + this.tyOfProduct +
+        "\nBrand    : " + this.brand + 
+        "\nModel    : " + this.modelLap +
+        "\nMemory   : " + this.memoryOp +
+        super.toString();
     }
 }
