@@ -4,8 +4,12 @@ import java.io.*;
 import java.util.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.FileReader;
+//import java.io.BufferedReader;
+//import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Write a description of class Main here.
@@ -19,7 +23,7 @@ public class Main implements Serializable
 
     //my own destop version
     private final String finalFile = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.csv";
-
+    private final String finalFile1 = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.dat";
     //school destop version
     private final String finalFile2 = "C:\\Users\\D22124534\\Desktop\\Final Assignment\\StockControlSystem\\OOSD\\StockInventory\\StockInventory.csv";
 
@@ -42,26 +46,38 @@ public class Main implements Serializable
         String splite = ",";
         try (PrintWriter writer = new PrintWriter(new FileWriter(this.finalFile))) {
             writer.println(String.join(splite,HeadList)); //the header of all data
-
+            //ObjectOutputStream oOP = new ObjectOutputStream(new FileOutputStream(this.finalFile));
+            //ObjectInputStream oIP = new ObjectInputStream(new FileInputStream(this.finalFile));
+            
             // check everthing value on the list and add it to the text file
             for (Inventory each: list) {
                 if (each instanceof Laptop) {
                     Laptop laptop = (Laptop) each;
+                    //oOP.writeObject(laptop);
+                    //laptop = (Laptop) oIP.readObject();
                     
                     // get everydata and make it as a array
                     String[] laptopList = {laptop.getTyOfLap(),laptop.getBrand(),laptop.getModelLap(),laptop.getMemoryOp(),Integer.toString(laptop.getNumOfStock()),Double.toString(laptop.getPrices())}; //pass in all the detail with all the 
                     writer.println(String.join(splite,laptopList)); //seprate the actual value data by ", " in order
                 } else if (each instanceof Mobile) {
                     Mobile mobile = (Mobile) each;
+                    //oOP.writeObject(mobile);
+                    //mobile = (Mobile) oIP.readObject();
                     String[] line = {mobile.getTyOfMob(), mobile.getBrand(), mobile.getModelMob(), mobile.getMemoryOp(),Integer.toString(mobile.getNumOfStock()),Double.toString(mobile.getPrices())};
                     writer.println(String.join(splite,line));
                 }
             }
+            //oOP.close();
+            //oIP.close();
             writer.close();
-        }catch (IOException e) {
-            System.out.println("\nThere is an error with the file...");
+        }catch (EOFException e) {
+            //System.out.println("\nThere is an error with save the file...");
             e.printStackTrace();
-        }
+        }catch (IOException e) {
+            e.printStackTrace();
+        } //catch (ClassNotFoundException e) {
+            //e.printStackTrace();
+        //}
     }
 
     /** 4. display the main menu and ask the option **/
@@ -140,11 +156,11 @@ public class Main implements Serializable
         Scanner scan = new Scanner(System.in);
         int customerOption = 0;
         System.out.print("\f");
-        displayCustomerMenu();
+        //displayCustomerMenu();
 
         //display menu and validate the option
         do {
-            //displayCustomerMenu();
+            displayCustomerMenu();
             customerOption = checkOption();
             switch (customerOption) {
                 case 1:cusrtomerOption1();break;
@@ -240,6 +256,8 @@ public class Main implements Serializable
                     System.out.println("\nNo correct option - couldn't process");
                 }
             }
+        } else {
+            System.out.println("\n*** Do Product Found! ***");
         }
         exit();
     }
@@ -314,8 +332,8 @@ public class Main implements Serializable
         
         // if it not null validate the password
         if (staff != null) {
-            System.out.println("TEXT: " + staff.getPassword());
-            scan.next(); //stop here
+            //System.out.println("TEXT: " + staff.getPassword());
+            //scan.next(); //stop here
             if (count >= 3) {
                 System.out.println("You have use all " + count + " attepmts!");
             } else {

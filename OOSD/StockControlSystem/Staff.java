@@ -13,6 +13,7 @@ public class Staff
     
     public Staff() {
         this.staffName = "";
+        this.staffID = "";
         this.password = "";
     }
     
@@ -49,7 +50,7 @@ public class Staff
     //validate the password type
     public boolean isCorrectPassword() {
         boolean isValidPassword = true;
-        if (this.password.length() <= 6 || this.password.length() >= 8) 
+        if (this.password.length() <= 6 || this.password.length() >= 10) 
             isValidPassword = false;
         else if (this.password.charAt(0) != 'A' && this.password.charAt(0) != 'Z')
             isValidPassword = false;
