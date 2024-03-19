@@ -9,13 +9,13 @@ public class Laptop extends Inventory
 {
     private String tyOfProduct;
     private String brand;
-    private String modelLap;
+    private String deviceModel;
     private String memoryOp;
     
     public Laptop() {
         this.tyOfProduct = "";
         this.brand = "";
-        this.modelLap = "";
+        this.deviceModel = "";
         this.memoryOp = "";
     }
     
@@ -23,18 +23,18 @@ public class Laptop extends Inventory
         super(nOS,p);
         this.tyOfProduct = tOL;
         this.brand = b;
-        this.modelLap = mL;
+        this.deviceModel = mL;
         this.memoryOp = mO;
     }
     
-    public Laptop(String tOL, String b, String mL, String mO) {
+    public Laptop(String tOL, String b, String devM, String mO) {
         this.tyOfProduct = tOL;
         this.brand = b;
-        this.modelLap = mL;
+        this.deviceModel = devM;
         this.memoryOp = mO;
     }
     
-    public String getTyOfLap() {
+    public String getTyOfProducts() {
         return this.tyOfProduct;
     }
     
@@ -42,8 +42,8 @@ public class Laptop extends Inventory
         return this.brand;
     }
     
-    public String getModelLap() {
-        return this.modelLap;
+    public String getDeviceModel() {
+        return this.deviceModel;
     }
     
     public String getMemoryOp() {
@@ -58,11 +58,19 @@ public class Laptop extends Inventory
         this.brand = b;
     }
     
+    public void setDeviceModel(String devM) {
+        this.deviceModel = devM;
+    }
+    
+    public void setMemoryOp(String mmrOp) {
+        this.memoryOp = mmrOp;
+    }
+    
     public String toString() {
         return 
         "Products : " + this.tyOfProduct +
         "\nBrand    : " + this.brand + 
-        "\nModel    : " + this.modelLap +
+        "\nModel    : " + this.deviceModel +
         "\nMemory   : " + this.memoryOp;
     }
     
@@ -70,7 +78,7 @@ public class Laptop extends Inventory
         return 
         "Products : " + this.tyOfProduct +
         "\nBrand    : " + this.brand + 
-        "\nModel    : " + this.modelLap +
+        "\nModel    : " + this.deviceModel +
         "\nMemory   : " + this.memoryOp +
         super.toString();
     }

@@ -4,8 +4,6 @@ import java.io.*;
 import java.util.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-//import java.io.BufferedReader;
-//import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.FileOutputStream;
@@ -24,11 +22,7 @@ public class Main implements Serializable
     //my own destop version
     private final String finalFile = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.csv";
     private final String finalFile1 = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.dat";
-    //school destop version
-    private final String finalFile2 = "C:\\Users\\D22124534\\Desktop\\Final Assignment\\StockControlSystem\\OOSD\\StockInventory\\StockInventory.csv";
-
-    //my own laptop version
-    private final String finalFile3 = "C:\\Users\\LocalAdmin\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\StockControlSystem\\OOSD\\StockInventory\\StockInventory.csv";
+    
     private final String[] HeadList = {"Type of Products","Brand","Model","Memory","Stock","Prices"}; // header for text file
     private int count = 0;
     ArrayList<Inventory> list; 
@@ -38,6 +32,7 @@ public class Main implements Serializable
     public Main() {
         list = new ArrayList<Inventory>();
         sList = new ArrayList<Staff>();
+        readTheFile(); //call method for reading the file
         mainMenu();
     }
     
@@ -45,39 +40,50 @@ public class Main implements Serializable
     public void updateTextFile() {
         String splite = ",";
         try (PrintWriter writer = new PrintWriter(new FileWriter(this.finalFile))) {
-            writer.println(String.join(splite,HeadList)); //the header of all data
-            //ObjectOutputStream oOP = new ObjectOutputStream(new FileOutputStream(this.finalFile));
-            //ObjectInputStream oIP = new ObjectInputStream(new FileInputStream(this.finalFile));
+            writer.println(String.join(splite,HeadList)); //the common and header of all data
+            ObjectOutputStream oOP = new ObjectOutputStream(new FileOutputStream(this.finalFile1)); //outpur the file as dat
             
             // check everthing value on the list and add it to the text file
             for (Inventory each: list) {
                 if (each instanceof Laptop) {
                     Laptop laptop = (Laptop) each;
-                    //oOP.writeObject(laptop);
-                    //laptop = (Laptop) oIP.readObject();
+                    oOP.writeObject(laptop); //file out every value into object
                     
-                    // get everydata and make it as a array
-                    String[] laptopList = {laptop.getTyOfLap(),laptop.getBrand(),laptop.getModelLap(),laptop.getMemoryOp(),Integer.toString(laptop.getNumOfStock()),Double.toString(laptop.getPrices())}; //pass in all the detail with all the 
-                    writer.println(String.join(splite,laptopList)); //seprate the actual value data by ", " in order
+                    // get everydata and put it in an array
+                    String[] laptopList = {laptop.getTyOfProducts(),laptop.getBrand(),laptop.getDeviceModel(),laptop.getMemoryOp(),Integer.toString(laptop.getNumOfStock()),Double.toString(laptop.getPrices())}; //pass in all the detail with all the 
+                    writer.println(String.join(splite,laptopList)); //common (", ") the data
                 } else if (each instanceof Mobile) {
                     Mobile mobile = (Mobile) each;
-                    //oOP.writeObject(mobile);
-                    //mobile = (Mobile) oIP.readObject();
-                    String[] line = {mobile.getTyOfMob(), mobile.getBrand(), mobile.getModelMob(), mobile.getMemoryOp(),Integer.toString(mobile.getNumOfStock()),Double.toString(mobile.getPrices())};
+                    oOP.writeObject(mobile);
+                    String[] line = {mobile.getTyOfProducts(), mobile.getBrand(), mobile.getDeviceModel(), mobile.getMemoryOp(),Integer.toString(mobile.getNumOfStock()),Double.toString(mobile.getPrices())};
                     writer.println(String.join(splite,line));
                 }
             }
-            //oOP.close();
-            //oIP.close();
             writer.close();
         }catch (EOFException e) {
             //System.out.println("\nThere is an error with save the file...");
             e.printStackTrace();
         }catch (IOException e) {
             e.printStackTrace();
-        } //catch (ClassNotFoundException e) {
-            //e.printStackTrace();
-        //}
+        }
+    }
+    
+    public void readTheFile() {
+        ObjectInputStream fileImport;
+        Inventory i;
+        try {
+            fileImport = new ObjectInputStream(new FileInputStream(this.finalFile1));
+            i = (Inventory) fileImport.readObject();
+            while(i != null) {
+                list.add(i);
+                i = (Inventory) fileImport.readObject(); 
+            }
+            fileImport.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /** 4. display the main menu and ask the option **/
@@ -117,6 +123,7 @@ public class Main implements Serializable
         System.out.println("==========================");
     }
     
+    //checking is it the valid opyion
     public int checkOption() {
         Scanner scan = new Scanner(System.in);
         int option = 0;
@@ -171,6 +178,7 @@ public class Main implements Serializable
             }
         } while (customerOption != 5);
         System.out.println("==========================");
+        readTheFile();
     }
     /** 5. menu option 1 - end here **/
 
@@ -180,7 +188,7 @@ public class Main implements Serializable
         System.out.print("\f");
         System.out.println("==========================");
         System.out.println("**** Mobile Sales List ***\n");
-
+          
         for (Inventory each: list) {
             if (each instanceof Mobile) {
                 System.out.println(each.toString());
@@ -242,12 +250,12 @@ public class Main implements Serializable
                     System.out.println("********* Receipt ********");
                     System.out.println("********* Details ********");
                     System.out.println("Brand   : " + mobile.getBrand());
-                    System.out.println("Products: " + mobile.getModelMob());
+                    System.out.println("Products: " + mobile.getDeviceModel());
                     System.out.println("Quantity: " + quantity);
                     System.out.println(" ");
                     System.out.println("**************************");
-                    System.out.println("\nPrices : " + mobile.getPrices());
-                    System.out.println("Total  : " + totalPrices);
+                    System.out.println("\nPrices : " + mobile.getPrices() + " euro");
+                    System.out.println("Total  : " + totalPrices + " euro");
                     System.out.println("==========================");
                     updateTextFile();
                 }else if (ans.equalsIgnoreCase("n")) {
@@ -257,7 +265,7 @@ public class Main implements Serializable
                 }
             }
         } else {
-            System.out.println("\n*** Do Product Found! ***");
+            System.out.println("\n*** No Product Found! ***");
         }
         exit();
     }
@@ -293,12 +301,12 @@ public class Main implements Serializable
                     System.out.println("********* Receipt ********");
                     System.out.println("********* Details ********");
                     System.out.println("Brand   : " + laptop.getBrand());
-                    System.out.println("Products: " + laptop.getModelLap());
+                    System.out.println("Products: " + laptop.getDeviceModel());
                     System.out.println("Quantity: " + quantity);
                     System.out.println(" ");
                     System.out.println("**************************");
-                    System.out.println("\nPrices: " + laptop.getPrices());
-                    System.out.println("Total : " + totalPrices);
+                    System.out.println("\nPrices: " + laptop.getPrices() + " euro");
+                    System.out.println("Total : " + totalPrices + " euro");
                     System.out.println("==========================");
                     updateTextFile();
                 }else if (ans.equalsIgnoreCase("n")) { // if customer say no cancel the payment
@@ -307,6 +315,8 @@ public class Main implements Serializable
                     System.out.println("\nNo correct option - couldn't process");
                 }
             }
+        } else {
+            System.out.println("\n*** No Product Found! ***");
         }
         exit();
     }
@@ -346,7 +356,6 @@ public class Main implements Serializable
                 }
             }
         } else if (staff == null){ // if is null create a new password
-            //System.out.println("TEXT2: " + staff.getPassword());
             System.out.println("\n\nNo account found - please film the form");
             createPassword();
         }
@@ -361,7 +370,7 @@ public class Main implements Serializable
                 return staff;
             }
         }
-        return null;
+        return new Staff("","",pas);
     }
 
     // ask staff to create password
@@ -511,8 +520,6 @@ public class Main implements Serializable
             if (mobile != null) { // if there is product on the list
                 System.out.println("\n*** found the device ***");
                 setMobileStockAndPrices(mobile);
-                updateTextFile();// update the text file
-                System.out.println("\nNew stock is been delivered!");
             } else {
                 System.out.println("The device is not found - couldn't process");
             }
@@ -525,8 +532,6 @@ public class Main implements Serializable
             if (laptop != null) {
                 System.out.println("\n*** found the device ***");
                 setLaptopStockAndPrices(laptop);
-                updateTextFile();
-                System.out.println("\nNew stock is been delivered!");
             } else {
                 System.out.println("\nThe " + model + " is not found - couldn't process");
             }
@@ -554,6 +559,12 @@ public class Main implements Serializable
         System.out.print("\nEnter the prices: ");
         double prices = scan.nextDouble();
         m.setPrices(prices);//set the prices
+        if (stock < 1) {
+            System.out.println("\nNeed at least 1 stock!");
+        } else {
+            updateTextFile();
+            System.out.println("\nNew stock is been delivered!");
+        }
     }
 
     // pure module for asking the stock and prices for laptop
@@ -565,6 +576,12 @@ public class Main implements Serializable
         System.out.print("\nEnter the prices: ");
         double prices = scan.nextDouble();
         l.setPrices(prices);//set the prices
+        if (stock < 1) {
+            System.out.println("\nNeed at least 1 stock!");
+        } else {
+            updateTextFile();
+            System.out.println("\nNew stock is been delivered!");
+        }
     }
     /** 14. staff menu option 3 - end here **/
 
@@ -574,7 +591,7 @@ public class Main implements Serializable
         for (Inventory each: list) {
             if (each instanceof Mobile) {
                 mobile = (Mobile)each;
-                if (brand.equalsIgnoreCase(mobile.getBrand()) && model.equalsIgnoreCase(mobile.getModelMob())) {
+                if (brand.equalsIgnoreCase(mobile.getBrand()) && model.equalsIgnoreCase(mobile.getDeviceModel())) {
                     return mobile;
                 }
             } 
@@ -588,7 +605,7 @@ public class Main implements Serializable
         for (Inventory each: list) {
             if (each instanceof Laptop) {
                 laptop = (Laptop)each;
-                if (brand.equalsIgnoreCase(laptop.getBrand()) && model.equalsIgnoreCase(laptop.getModelLap())) {
+                if (brand.equalsIgnoreCase(laptop.getBrand()) && model.equalsIgnoreCase(laptop.getDeviceModel())) {
                     return laptop;
                 }
             } 

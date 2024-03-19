@@ -7,70 +7,78 @@
  */
 public class Mobile extends Inventory
 {
-    private String tyOfMob;
+    private String tyOfProducts;
     private String brand;
-    private String modelMob;
+    private String deviceModel;
     private String memoryOp;
     
     public Mobile() {
-        this.tyOfMob = "";
+        this.tyOfProducts = "";
         this.brand = "";
-        this.modelMob = "";
+        this.deviceModel = "";
         this.memoryOp = "";
     }
     
-    public Mobile(String tOM, String b, String medM, String mmrOp, int nOS, double p) {
+    public Mobile(String tOP, String b, String medM, String mmrOp, int nOS, double p) {
         super(nOS,p);
-        this.tyOfMob = tOM;
+        this.tyOfProducts = tOP;
         this.brand = b;
-        this.modelMob =medM;
+        this.deviceModel =medM;
         this.memoryOp =mmrOp;
     }
     
-    public Mobile(String tOM, String b, String medM, String mmrOp) {
-        this.tyOfMob = tOM;
+    public Mobile(String tOP, String b, String devM, String mmrOp) {
+        this.tyOfProducts = tOP;
         this.brand = b;
-        this.modelMob =medM;
+        this.deviceModel =devM;
         this.memoryOp =mmrOp;
     }
     
-    public String getTyOfMob() {
-        return this.tyOfMob;
+    public String getTyOfProducts() {
+        return this.tyOfProducts;
     }
     
     public String getBrand() {
         return this.brand;
     }
     
-    public String getModelMob() {
-        return this.modelMob;
+    public String getDeviceModel() {
+        return this.deviceModel;
     }
     
     public String getMemoryOp() {
         return this.memoryOp;
     }
     
-    public void setTyOfMob(String tOM) {
-        this.tyOfMob = tOM;
+    public void setTyOfMob(String tOP) {
+        this.tyOfProducts = tOP;
     }
     
     public void setBrand(String b) {
         this.brand = b;
     }
     
+    public void setDeviceModel(String devM) {
+        this.deviceModel = devM;
+    }
+    
+    public void setMemoryOP(String mmrOp) {
+        this.memoryOp = mmrOp;
+    }
+    
     public String toString() {
         return 
-        "Products : " + this.tyOfMob +
+        "Products : " + this.tyOfProducts +
         "\nBrand    : " + this.brand + 
-        "\nModel    : " + this.modelMob +
+        "\nModel    : " + this.deviceModel +
         "\nMemory   : " + this.memoryOp;
     }
     
     public String toStockString() {
         return 
-        "Products : " + this.tyOfMob +
+        "Products : " + this.tyOfProducts +
         "\nBrand    : " + this.brand + 
-        "\nModel    : " + this.modelMob +
+        "\nModel    : " + this.deviceModel +
         "\nMemory   : " + this.memoryOp + 
         super.toString();
     }
