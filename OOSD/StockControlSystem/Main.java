@@ -20,11 +20,12 @@ public class Main
     //private static final String adminPassword = "Admin123";
 
     //my own destop version
-    private final String finalFile = "C:\\Users\\LocalAdmin\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\StockControlSystem\\OOSD\\StockInventory\\StockInventory.csv";
+    private final String finalFile = "C:\\Users\\anson\\OneDrive - Technological University Dublin\\Year 1\\Business Computing Sem 2\\OOSD&PSD Final Assignment\\OOSD\\StockInventory\\StockInventory.csv";
     final String finalFile1 = "StockInventory.dat";
 
     private final String[] HeadList = {"Type of Products","Brand","Model","Memory","Stock","Prices"}; // header for text file
     private int count = 0;
+    
     ArrayList<Inventory> list; 
     ArrayList<Staff> sList;
 
@@ -34,10 +35,11 @@ public class Main
         list = new ArrayList<Inventory>();
         sList = new ArrayList<Staff>();
         if (readTheFile()) {
-            System.out.println("\nThe list has been populated with product");
+            System.out.println("\nThe list has been populated with product!");
         } else {
-            System.out.println("\nThere are no products in the list");
+            System.out.println("\nThere are no products in the list!");
         }
+        System.out.println("\nEnter press to continue....");
         scan.nextLine();
         mainMenu();
     }
@@ -47,7 +49,7 @@ public class Main
         String splite = ",";
         try  {
             ObjectOutputStream oOP = new ObjectOutputStream(new FileOutputStream(finalFile1)); //outpur the file as dat
-            System.out.println("Size of list :"  + list.size());
+
             // check everthing value on the list and add it to the text file
             for (Inventory each: list) {
                 oOP.writeObject(each); //file out every value into object
@@ -93,18 +95,21 @@ public class Main
         ObjectInputStream fileImport;
         int index = 0;
         Inventory i;
+        
+        //read file
         try {
-            fileImport = new ObjectInputStream(new FileInputStream(finalFile1));
+            fileImport = new ObjectInputStream(new FileInputStream(finalFile1));//read the dat file
             i = (Inventory) fileImport.readObject();
             index = 1;
+            //read everything on the list
             while(i != null) {
                 list.add(i);
                 i = (Inventory) fileImport.readObject(); 
             }
             fileImport.close();
             return true;
-        } catch (IOException e) {
-            System.out.println("TEXT : " + index);
+        } catch (IOException e) { //catch the error
+            // if the index is more than one which mean there is value, else there is nothing
             if (index > 0) {
                 return true;
             } else {
@@ -134,13 +139,14 @@ public class Main
         count = 0;
     }
 
+    //pure module for asking the menu
     public void askMenuOption() {
         Scanner scan = new Scanner(System.in);
         int menuOption = 0;
-        System.out.print("\f");
+        //System.out.print("\f");
         
         do {
-            //System.out.print("\f");
+            System.out.print("\f");
             displayMenu(); // display main menu
             menuOption = checkOption();
             switch (menuOption) {
@@ -173,7 +179,7 @@ public class Main
 
     /** 5. menu option 1 **/
     public void customerOption1() {
-        System.out.print("\f");
+        //System.out.print("\f");
         askCustomerMenuOption();
     }
 
@@ -192,11 +198,9 @@ public class Main
     public void askCustomerMenuOption() {
         Scanner scan = new Scanner(System.in);
         int customerOption = 0;
-        System.out.print("\f");
-        //displayCustomerMenu();
 
-        //display menu and validate the option
         do {
+            System.out.print("\f");
             displayCustomerMenu();
             customerOption = checkOption();
             switch (customerOption) {
@@ -262,9 +266,11 @@ public class Main
         String brand = "", model = "", ans = "";
         int quantity = 0;
         System.out.print("\f");
-        System.out.print("Enter the brand: ");
+        System.out.println("**** Enter the detail ****");
+        System.out.println("==========================");
+        System.out.print("\nEnter the brand: ");
         brand = scan.nextLine();
-        System.out.print("Enter the model: ");
+        System.out.print("\nEnter the model: ");
         model = scan.nextLine();
 
         mobile = searchMobileProducts(brand,model); //search the product
@@ -275,7 +281,7 @@ public class Main
             if (mobile.getNumOfStock() < quantity) { // if stock is less than the quantity, no enough stock
                 System.out.println("\nNot enough stock - couldn't process");
             } else {
-                System.out.print("Did you wish to process(y/n)? ");
+                System.out.print("\nDid you wish to process(y/n)? ");
                 ans = scan.nextLine();
                 if (ans.equalsIgnoreCase("y")) { // if customer say yes display receipt
                     System.out.print("\f");
@@ -313,6 +319,8 @@ public class Main
         String brand = "", model = "", ans = "";
         int quantity = 0;
         System.out.print("\f"); // clear the scrrem
+        System.out.println("**** Enter the detail ****");
+        System.out.println("==========================");
         System.out.print("Enter the brand: ");
         brand = scan.nextLine();
         System.out.print("Enter the model: ");
@@ -320,7 +328,7 @@ public class Main
 
         laptop = searchLaptopProducts(brand,model);// search the product
         if (laptop != null) {
-            System.out.print("How many did you wish to purchase: ");
+            System.out.print("\nHow many did you wish to purchase: ");
             quantity = scan.nextInt();
             scan.nextLine();
             if (laptop.getNumOfStock() < quantity) {
@@ -371,7 +379,6 @@ public class Main
         String password = "";
         Staff staff = null;
         if (sList.isEmpty()) {
-            System.out.println("\n\nNo account found - please film the form");
             createPassword();
         } else {
             do {
@@ -408,6 +415,10 @@ public class Main
         String staName = "", staPass = ""; 
         final String staID ="D221234";
         Staff staff = null;
+        
+        System.out.print("\f");
+        System.out.println("No account found - create form");
+        System.out.println("==============================");
         System.out.print("\nEnter name: ");
         staName = scan.nextLine();
 
@@ -442,11 +453,11 @@ public class Main
     public void askStaffMenuOption() {
         Scanner scan = new Scanner(System.in);
         int staffOption = 0;
-        System.out.print("\f");
+        //System.out.print("\f");
 
         // display menu and validate the option
         do {
-
+            System.out.print("\f");
             displayStaffMenu();
             staffOption = checkOption();
             switch (staffOption) {
@@ -457,7 +468,6 @@ public class Main
                 case 5:break;
             }
         } while (staffOption != 5);
-        System.out.println("==========================");
     }
     /** 11. staff menu - end here **/
 
@@ -469,7 +479,8 @@ public class Main
         int numOfAsk = 0;
 
         System.out.print("\f");//clear the screem
-
+        System.out.println("**** Enter the detail ****");
+        System.out.println("==========================");
         //enter the brand, model, option
         System.out.print("\nEnter the brand  : ");
         brand = scan.nextLine();
@@ -493,6 +504,8 @@ public class Main
         String brand = "", model = "", memory = "", ans = "";
 
         System.out.print("\f");
+        System.out.println("**** Enter the detail ****");
+        System.out.println("==========================");
         System.out.print("\nEnter the brand  : ");
         brand = scan.nextLine();
         System.out.print("\nEnter the model  : ");
@@ -519,24 +532,32 @@ public class Main
         typeOfProd = scan.nextLine();
 
         if (typeOfProd.equalsIgnoreCase("mobile")) { // if staff input mobile
+            System.out.print("\f");
+            System.out.println("**** Enter the detail ****");
+            System.out.println("==========================");
             System.out.print("\nEnter the brand: ");
             brand = scan.nextLine();
             System.out.print("\nEnter the model: ");
             model = scan.nextLine();
             mobile = searchMobileProducts(brand,model); // search the product
             if (mobile != null) { // if there is product on the list
+                System.out.print("\f");
                 System.out.println("\n*** found the device ***");
                 setMobileStockAndPrices(mobile);
             } else {
                 System.out.println("The device is not found - couldn't process");
             }
         } else if (typeOfProd.equalsIgnoreCase("laptop")) { // if staff input laptop
+            System.out.print("\f");
+            System.out.println("**** Enter the detail ****");
+            System.out.println("==========================");
             System.out.print("\nEnter the brand: ");
             brand = scan.nextLine();
             System.out.print("\nEnter the model: ");
             model = scan.nextLine();
             laptop = searchLaptopProducts(brand,model);
             if (laptop != null) {
+                System.out.print("\f");
                 System.out.println("\n*** found the device ***");
                 setLaptopStockAndPrices(laptop);
             } else {
@@ -549,12 +570,14 @@ public class Main
     }
 
     public void checkStock() {
+        System.out.print("\f");
+        System.out.println("==========================");
+        System.out.println("********* Stocks *********\n");
         for (Inventory each: list) {
-            System.out.println("==========================");
-            System.out.println("********* Stocks *********\n");
             System.out.println(each.toStockString());
             System.out.println("\n==========================");
         }
+        exit();
     }
 
     // pure module for asking the stock and prices for mobile
@@ -621,12 +644,12 @@ public class Main
     /** 15. & 16. pure module for press go back and exit **/
     public void exit() {
         Scanner scan = new Scanner(System.in);
-        System.out.print("Press enter to go back/exits...");
+        System.out.print("\nPress enter to go back/exits...");
         String input = scan.nextLine();
     }
 
     /** main method **/
     public static void main(String[] args) {
-
+        new Main();
     }
 }
